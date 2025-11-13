@@ -24,10 +24,11 @@ TicketDot is a decentralized application (DApp) that revolutionizes event ticket
 - High platform fees and centralized control
 
 ### Our Solution
-
 TicketDot uses **Polkadot's Astar Network** and **Ink! smart contracts** to create tamper-proof, transferable NFT tickets that solve these issues at the protocol level.
 
 - Project Pitch and Details: See [PROJECT_OVERVIEW.md](./PROJECT_OVERVIEW.md)
+
+https://github.com/user-attachments/assets/3e65f4ae-6d40-4dce-90a3-d4373ecebdb2
 
 ---
 
@@ -222,7 +223,7 @@ Contributions are welcome! Please follow these steps:
 
 ## 📄 License
 
-## This project is licensed under the **MIT License** - see [LICENSE](./LICENSE) file.
+- This project is licensed under the **MIT License** - see [LICENSE](./LICENSE) file.
 
 ## 🙏 Acknowledgments
 
@@ -231,7 +232,7 @@ Contributions are welcome! Please follow these steps:
 - **OpenBrush** - For NFT standard implementations
 - **Polkadot.js Team** - For the excellent API and tooling
 - **React Community** - For the robust frontend framework
-- TypeScript - For enhancing JavaScript with types
+- **TypeScript** - For enhancing JavaScript with types
 
 ---
 
