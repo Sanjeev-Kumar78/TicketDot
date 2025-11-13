@@ -1,0 +1,2298 @@
+{
+  "source": {
+    "hash": "0x5d7eaf8eb074f826e143e2b88d823565973bc10bf3dee000bd7517d31a41388e",
+    "language": "ink! 5.1.1",
+    "compiler": "rustc 1.91.1",
+    "build_info": {
+      "build_mode": "Release",
+      "cargo_contract_version": "5.0.3",
+      "rust_toolchain": "stable-x86_64-pc-windows-msvc",
+      "wasm_opt_settings": {
+        "keep_debug_symbols": false,
+        "optimization_passes": "Z"
+      }
+    }
+  },
+  "contract": {
+    "name": "ticketdot",
+    "version": "0.1.0",
+    "authors": [
+      "TicketDot Team"
+    ]
+  },
+  "image": null,
+  "spec": {
+    "constructors": [
+      {
+        "args": [],
+        "default": false,
+        "docs": [
+          "Constructor - initializes the contract"
+        ],
+        "label": "new",
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "ink_primitives",
+            "ConstructorResult"
+          ],
+          "type": 24
+        },
+        "selector": "0x9bae9d5e"
+      }
+    ],
+    "docs": [
+      " # TicketDot Smart Contract",
+      " ",
+      " A decentralized ticket booking platform where:",
+      " - Event organizers can create events",
+      " - Users can buy tickets (represented as NFTs)",
+      " - Tickets can be transferred between users",
+      " ",
+      " Built with Ink! for Polkadot/Substrate chains"
+    ],
+    "environment": {
+      "accountId": {
+        "displayName": [
+          "AccountId"
+        ],
+        "type": 2
+      },
+      "balance": {
+        "displayName": [
+          "Balance"
+        ],
+        "type": 5
+      },
+      "blockNumber": {
+        "displayName": [
+          "BlockNumber"
+        ],
+        "type": 6
+      },
+      "chainExtension": {
+        "displayName": [
+          "ChainExtension"
+        ],
+        "type": 39
+      },
+      "hash": {
+        "displayName": [
+          "Hash"
+        ],
+        "type": 38
+      },
+      "maxEventTopics": 4,
+      "staticBufferSize": 16384,
+      "timestamp": {
+        "displayName": [
+          "Timestamp"
+        ],
+        "type": 0
+      }
+    },
+    "events": [
+      {
+        "args": [
+          {
+            "docs": [],
+            "indexed": true,
+            "label": "ticket_id",
+            "type": {
+              "displayName": [
+                "u64"
+              ],
+              "type": 0
+            }
+          },
+          {
+            "docs": [],
+            "indexed": true,
+            "label": "event_id",
+            "type": {
+              "displayName": [
+                "u64"
+              ],
+              "type": 0
+            }
+          }
+        ],
+        "docs": [],
+        "label": "TicketUsed",
+        "module_path": "ticketdot::ticketdot",
+        "signature_topic": "0x0bf442be04b63404612119211cedda12d78dc7170adfa462fae6ac13d817e099"
+      },
+      {
+        "args": [
+          {
+            "docs": [],
+            "indexed": true,
+            "label": "event_id",
+            "type": {
+              "displayName": [
+                "u64"
+              ],
+              "type": 0
+            }
+          },
+          {
+            "docs": [],
+            "indexed": true,
+            "label": "organizer",
+            "type": {
+              "displayName": [
+                "AccountId"
+              ],
+              "type": 2
+            }
+          },
+          {
+            "docs": [],
+            "indexed": false,
+            "label": "name",
+            "type": {
+              "displayName": [
+                "String"
+              ],
+              "type": 1
+            }
+          },
+          {
+            "docs": [],
+            "indexed": false,
+            "label": "price",
+            "type": {
+              "displayName": [
+                "Balance"
+              ],
+              "type": 5
+            }
+          },
+          {
+            "docs": [],
+            "indexed": false,
+            "label": "total_tickets",
+            "type": {
+              "displayName": [
+                "u32"
+              ],
+              "type": 6
+            }
+          }
+        ],
+        "docs": [
+          "Events emitted by the contract"
+        ],
+        "label": "EventCreated",
+        "module_path": "ticketdot::ticketdot",
+        "signature_topic": "0xdc2aa4394419744a2ab743e45ebc048a4b470e502a42c7baaecb181ee603285c"
+      },
+      {
+        "args": [
+          {
+            "docs": [],
+            "indexed": true,
+            "label": "event_id",
+            "type": {
+              "displayName": [
+                "u64"
+              ],
+              "type": 0
+            }
+          },
+          {
+            "docs": [],
+            "indexed": true,
+            "label": "organizer",
+            "type": {
+              "displayName": [
+                "AccountId"
+              ],
+              "type": 2
+            }
+          }
+        ],
+        "docs": [],
+        "label": "EventCancelled",
+        "module_path": "ticketdot::ticketdot",
+        "signature_topic": "0x9fdfc42ed10e839338deb13b61daf67454d8b377ceb156ff1432203801a6f90c"
+      },
+      {
+        "args": [
+          {
+            "docs": [],
+            "indexed": true,
+            "label": "event_id",
+            "type": {
+              "displayName": [
+                "u64"
+              ],
+              "type": 0
+            }
+          }
+        ],
+        "docs": [],
+        "label": "EventCompleted",
+        "module_path": "ticketdot::ticketdot",
+        "signature_topic": "0xf6f63ce77446bb06c3a4384d307ac4aca3d648d654afc7b08015e3ba58b182a8"
+      },
+      {
+        "args": [
+          {
+            "docs": [],
+            "indexed": true,
+            "label": "ticket_id",
+            "type": {
+              "displayName": [
+                "u64"
+              ],
+              "type": 0
+            }
+          },
+          {
+            "docs": [],
+            "indexed": true,
+            "label": "owner",
+            "type": {
+              "displayName": [
+                "AccountId"
+              ],
+              "type": 2
+            }
+          },
+          {
+            "docs": [],
+            "indexed": false,
+            "label": "amount",
+            "type": {
+              "displayName": [
+                "Balance"
+              ],
+              "type": 5
+            }
+          }
+        ],
+        "docs": [],
+        "label": "TicketRefunded",
+        "module_path": "ticketdot::ticketdot",
+        "signature_topic": "0x22c42ffa2e6682bd2593696c7c966fd2344a150df54359fc03438b43f57e463e"
+      },
+      {
+        "args": [
+          {
+            "docs": [],
+            "indexed": true,
+            "label": "ticket_id",
+            "type": {
+              "displayName": [
+                "u64"
+              ],
+              "type": 0
+            }
+          },
+          {
+            "docs": [],
+            "indexed": true,
+            "label": "event_id",
+            "type": {
+              "displayName": [
+                "u64"
+              ],
+              "type": 0
+            }
+          },
+          {
+            "docs": [],
+            "indexed": true,
+            "label": "owner",
+            "type": {
+              "displayName": [
+                "AccountId"
+              ],
+              "type": 2
+            }
+          },
+          {
+            "docs": [],
+            "indexed": false,
+            "label": "refund_amount",
+            "type": {
+              "displayName": [
+                "Balance"
+              ],
+              "type": 5
+            }
+          }
+        ],
+        "docs": [],
+        "label": "TicketCancelled",
+        "module_path": "ticketdot::ticketdot",
+        "signature_topic": "0xd7dae10ece0bbac38d749baf5aa9690c1e9001cfccf72d873d8caa7c39bcc9ea"
+      },
+      {
+        "args": [
+          {
+            "docs": [],
+            "indexed": true,
+            "label": "ticket_id",
+            "type": {
+              "displayName": [
+                "u64"
+              ],
+              "type": 0
+            }
+          },
+          {
+            "docs": [],
+            "indexed": true,
+            "label": "event_id",
+            "type": {
+              "displayName": [
+                "u64"
+              ],
+              "type": 0
+            }
+          },
+          {
+            "docs": [],
+            "indexed": true,
+            "label": "buyer",
+            "type": {
+              "displayName": [
+                "AccountId"
+              ],
+              "type": 2
+            }
+          },
+          {
+            "docs": [],
+            "indexed": false,
+            "label": "price",
+            "type": {
+              "displayName": [
+                "Balance"
+              ],
+              "type": 5
+            }
+          }
+        ],
+        "docs": [],
+        "label": "TicketPurchased",
+        "module_path": "ticketdot::ticketdot",
+        "signature_topic": "0x5f67d34b20fa2174cc54f1acfc67f70934f12dcfa52a6d6195f0268fac429aed"
+      },
+      {
+        "args": [
+          {
+            "docs": [],
+            "indexed": true,
+            "label": "ticket_id",
+            "type": {
+              "displayName": [
+                "u64"
+              ],
+              "type": 0
+            }
+          },
+          {
+            "docs": [],
+            "indexed": true,
+            "label": "from",
+            "type": {
+              "displayName": [
+                "AccountId"
+              ],
+              "type": 2
+            }
+          },
+          {
+            "docs": [],
+            "indexed": true,
+            "label": "to",
+            "type": {
+              "displayName": [
+                "AccountId"
+              ],
+              "type": 2
+            }
+          }
+        ],
+        "docs": [],
+        "label": "TicketTransferred",
+        "module_path": "ticketdot::ticketdot",
+        "signature_topic": "0xef3e2c6846e8c1d5761cead1e13d2e4f26638910369a5c2465f8cbb48268f7fc"
+      }
+    ],
+    "lang_error": {
+      "displayName": [
+        "ink",
+        "LangError"
+      ],
+      "type": 25
+    },
+    "messages": [
+      {
+        "args": [
+          {
+            "label": "name",
+            "type": {
+              "displayName": [
+                "String"
+              ],
+              "type": 1
+            }
+          },
+          {
+            "label": "price",
+            "type": {
+              "displayName": [
+                "Balance"
+              ],
+              "type": 5
+            }
+          },
+          {
+            "label": "total_tickets",
+            "type": {
+              "displayName": [
+                "u32"
+              ],
+              "type": 6
+            }
+          },
+          {
+            "label": "metadata_cid",
+            "type": {
+              "displayName": [
+                "String"
+              ],
+              "type": 1
+            }
+          }
+        ],
+        "default": false,
+        "docs": [
+          " Create a new event",
+          " ",
+          " # Security",
+          " - Validates all input parameters to prevent resource exhaustion",
+          " - Enforces maximum tickets per event to prevent DoS",
+          " - Validates minimum ticket price to prevent spam",
+          " - Validates string lengths to prevent storage bloat",
+          " ",
+          " # Arguments",
+          " * `name` - Event name (e.g., \"Polkadot Conference 2025\")",
+          " * `price` - Ticket price in native token (e.g., 1000000000000 for 1 SBY)",
+          " * `total_tickets` - Total number of tickets available",
+          " * `metadata_cid` - IPFS CID containing event metadata (description, image, venue, etc.)",
+          " ",
+          " # Returns",
+          " - `Ok(event_id)` - The ID of the newly created event",
+          " - `Err(Error::InvalidInput)` - Input validation failed"
+        ],
+        "label": "create_event",
+        "mutates": true,
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ],
+          "type": 26
+        },
+        "selector": "0x8067c49f"
+      },
+      {
+        "args": [
+          {
+            "label": "event_id",
+            "type": {
+              "displayName": [
+                "u64"
+              ],
+              "type": 0
+            }
+          }
+        ],
+        "default": false,
+        "docs": [
+          " Buy a ticket for an event",
+          " ",
+          " This function mints an NFT ticket and transfers it to the buyer.",
+          " Payment is handled via the payable mechanism.",
+          " Accepts exact payment amount only to prevent confusion.",
+          " ",
+          " # Security",
+          " - Requires exact payment amount to prevent overpayment",
+          " - Payment is transferred immediately to organizer BEFORE state changes",
+          " - Ticket is minted as NFT owned by buyer",
+          " - Enforces maximum tickets per user to prevent DoS",
+          " ",
+          " # Arguments",
+          " * `event_id` - ID of the event to buy ticket for",
+          " ",
+          " # Returns",
+          " - `Ok(ticket_id)` - The ID of the newly minted ticket",
+          " - `Err(Error::EventNotFound)` - Event doesn't exist",
+          " - `Err(Error::InsufficientPayment)` - Payment != ticket price",
+          " - `Err(Error::SoldOut)` - No tickets available",
+          " - `Err(Error::EventNotActive)` - Event is not active",
+          " - `Err(Error::TransferFailed)` - Payment transfer failed",
+          " - `Err(Error::TooManyTickets)` - User has reached ticket limit"
+        ],
+        "label": "buy_ticket",
+        "mutates": true,
+        "payable": true,
+        "returnType": {
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ],
+          "type": 26
+        },
+        "selector": "0xb1dc989b"
+      },
+      {
+        "args": [
+          {
+            "label": "ticket_id",
+            "type": {
+              "displayName": [
+                "u64"
+              ],
+              "type": 0
+            }
+          },
+          {
+            "label": "to",
+            "type": {
+              "displayName": [
+                "AccountId"
+              ],
+              "type": 2
+            }
+          }
+        ],
+        "default": false,
+        "docs": [
+          " Transfer ticket to another user",
+          " ",
+          " # Arguments",
+          " * `ticket_id` - ID of the ticket to transfer",
+          " * `to` - Account ID of the recipient"
+        ],
+        "label": "transfer_ticket",
+        "mutates": true,
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ],
+          "type": 29
+        },
+        "selector": "0xf8ff36a7"
+      },
+      {
+        "args": [
+          {
+            "label": "ticket_id",
+            "type": {
+              "displayName": [
+                "u64"
+              ],
+              "type": 0
+            }
+          }
+        ],
+        "default": false,
+        "docs": [
+          " Mark ticket as used (called by event organizer or admin)"
+        ],
+        "label": "use_ticket",
+        "mutates": true,
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ],
+          "type": 29
+        },
+        "selector": "0xd1359594"
+      },
+      {
+        "args": [
+          {
+            "label": "event_id",
+            "type": {
+              "displayName": [
+                "u64"
+              ],
+              "type": 0
+            }
+          }
+        ],
+        "default": false,
+        "docs": [
+          " Cancel an event and enable refunds for all ticket holders",
+          " Only the event organizer can cancel"
+        ],
+        "label": "cancel_event",
+        "mutates": true,
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ],
+          "type": 29
+        },
+        "selector": "0x7bc2a546"
+      },
+      {
+        "args": [
+          {
+            "label": "event_id",
+            "type": {
+              "displayName": [
+                "u64"
+              ],
+              "type": 0
+            }
+          }
+        ],
+        "default": false,
+        "docs": [
+          " Mark an event as completed (no more tickets can be used)",
+          " Only the event organizer can mark as completed"
+        ],
+        "label": "complete_event",
+        "mutates": true,
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ],
+          "type": 29
+        },
+        "selector": "0x4b88d8fd"
+      },
+      {
+        "args": [
+          {
+            "label": "ticket_id",
+            "type": {
+              "displayName": [
+                "u64"
+              ],
+              "type": 0
+            }
+          }
+        ],
+        "default": false,
+        "docs": [
+          " Refund a ticket for a cancelled event",
+          " Only works if the event has been cancelled and ticket hasn't been refunded yet",
+          " ",
+          " # Security",
+          " - Immediately removes ticket ID from owner's list for efficient queries",
+          " - Prevents double refunds with is_refunded flag"
+        ],
+        "label": "refund_ticket",
+        "mutates": true,
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ],
+          "type": 29
+        },
+        "selector": "0x03f3a6da"
+      },
+      {
+        "args": [
+          {
+            "label": "ticket_id",
+            "type": {
+              "displayName": [
+                "u64"
+              ],
+              "type": 0
+            }
+          }
+        ],
+        "default": false,
+        "docs": [
+          " Cancel a ticket and get refund (before event starts/completes)",
+          " This makes the ticket available for sale again",
+          " ",
+          " # Security",
+          " - Immediately removes ticket ID from owner's list for efficient queries",
+          " - Returns ticket to available pool"
+        ],
+        "label": "cancel_ticket",
+        "mutates": true,
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ],
+          "type": 29
+        },
+        "selector": "0x082b5b3c"
+      },
+      {
+        "args": [
+          {
+            "label": "event_id",
+            "type": {
+              "displayName": [
+                "u64"
+              ],
+              "type": 0
+            }
+          }
+        ],
+        "default": false,
+        "docs": [
+          " Withdraw earnings from a completed event",
+          " Only the organizer can withdraw after event is marked as completed",
+          " ",
+          " # Security",
+          " - Only organizer can withdraw",
+          " - Event must be completed first",
+          " - Calculates earnings based on tickets sold"
+        ],
+        "label": "withdraw_earnings",
+        "mutates": true,
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ],
+          "type": 29
+        },
+        "selector": "0x706391cb"
+      },
+      {
+        "args": [
+          {
+            "label": "event_id",
+            "type": {
+              "displayName": [
+                "u64"
+              ],
+              "type": 0
+            }
+          }
+        ],
+        "default": false,
+        "docs": [
+          " Get event details"
+        ],
+        "label": "get_event",
+        "mutates": false,
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ],
+          "type": 31
+        },
+        "selector": "0x1c7f7fa8"
+      },
+      {
+        "args": [
+          {
+            "label": "ticket_id",
+            "type": {
+              "displayName": [
+                "u64"
+              ],
+              "type": 0
+            }
+          }
+        ],
+        "default": false,
+        "docs": [
+          " Get ticket details"
+        ],
+        "label": "get_ticket",
+        "mutates": false,
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ],
+          "type": 33
+        },
+        "selector": "0xa515b63a"
+      },
+      {
+        "args": [
+          {
+            "label": "owner",
+            "type": {
+              "displayName": [
+                "AccountId"
+              ],
+              "type": 2
+            }
+          }
+        ],
+        "default": false,
+        "docs": [
+          " Get all tickets owned by an account",
+          " ",
+          " Returns only valid (non-refunded) tickets.",
+          " Refunded tickets are immediately removed from this list when cancelled/refunded,",
+          " so no runtime filtering is needed (O(1) lookup instead of O(n) iteration).",
+          " ",
+          " # Performance",
+          " - O(1) lookup using BTreeSet",
+          " - No iteration through refunded tickets",
+          " - Returns tickets sorted by ID"
+        ],
+        "label": "get_my_tickets",
+        "mutates": false,
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ],
+          "type": 35
+        },
+        "selector": "0x8ccd79af"
+      },
+      {
+        "args": [],
+        "default": false,
+        "docs": [
+          " Get total number of events created"
+        ],
+        "label": "get_event_count",
+        "mutates": false,
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ],
+          "type": 36
+        },
+        "selector": "0xfc3c8aca"
+      },
+      {
+        "args": [],
+        "default": false,
+        "docs": [
+          " Get total number of tickets minted"
+        ],
+        "label": "get_ticket_count",
+        "mutates": false,
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ],
+          "type": 36
+        },
+        "selector": "0x2ad72e72"
+      },
+      {
+        "args": [],
+        "default": false,
+        "docs": [
+          " Get contract admin"
+        ],
+        "label": "get_admin",
+        "mutates": false,
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ],
+          "type": 37
+        },
+        "selector": "0x57b8a8a7"
+      }
+    ]
+  },
+  "storage": {
+    "root": {
+      "layout": {
+        "struct": {
+          "fields": [
+            {
+              "layout": {
+                "leaf": {
+                  "key": "0x00000000",
+                  "ty": 0
+                }
+              },
+              "name": "event_counter"
+            },
+            {
+              "layout": {
+                "leaf": {
+                  "key": "0x00000000",
+                  "ty": 0
+                }
+              },
+              "name": "ticket_counter"
+            },
+            {
+              "layout": {
+                "root": {
+                  "layout": {
+                    "struct": {
+                      "fields": [
+                        {
+                          "layout": {
+                            "leaf": {
+                              "key": "0xb520bd3e",
+                              "ty": 0
+                            }
+                          },
+                          "name": "id"
+                        },
+                        {
+                          "layout": {
+                            "leaf": {
+                              "key": "0xb520bd3e",
+                              "ty": 1
+                            }
+                          },
+                          "name": "name"
+                        },
+                        {
+                          "layout": {
+                            "leaf": {
+                              "key": "0xb520bd3e",
+                              "ty": 2
+                            }
+                          },
+                          "name": "organizer"
+                        },
+                        {
+                          "layout": {
+                            "leaf": {
+                              "key": "0xb520bd3e",
+                              "ty": 5
+                            }
+                          },
+                          "name": "price"
+                        },
+                        {
+                          "layout": {
+                            "leaf": {
+                              "key": "0xb520bd3e",
+                              "ty": 6
+                            }
+                          },
+                          "name": "total_tickets"
+                        },
+                        {
+                          "layout": {
+                            "leaf": {
+                              "key": "0xb520bd3e",
+                              "ty": 6
+                            }
+                          },
+                          "name": "available_tickets"
+                        },
+                        {
+                          "layout": {
+                            "leaf": {
+                              "key": "0xb520bd3e",
+                              "ty": 0
+                            }
+                          },
+                          "name": "timestamp"
+                        },
+                        {
+                          "layout": {
+                            "leaf": {
+                              "key": "0xb520bd3e",
+                              "ty": 1
+                            }
+                          },
+                          "name": "metadata_cid"
+                        },
+                        {
+                          "layout": {
+                            "leaf": {
+                              "key": "0xb520bd3e",
+                              "ty": 7
+                            }
+                          },
+                          "name": "active"
+                        },
+                        {
+                          "layout": {
+                            "leaf": {
+                              "key": "0xb520bd3e",
+                              "ty": 7
+                            }
+                          },
+                          "name": "cancelled"
+                        },
+                        {
+                          "layout": {
+                            "leaf": {
+                              "key": "0xb520bd3e",
+                              "ty": 7
+                            }
+                          },
+                          "name": "completed"
+                        }
+                      ],
+                      "name": "Event"
+                    }
+                  },
+                  "root_key": "0xb520bd3e",
+                  "ty": 8
+                }
+              },
+              "name": "events"
+            },
+            {
+              "layout": {
+                "root": {
+                  "layout": {
+                    "struct": {
+                      "fields": [
+                        {
+                          "layout": {
+                            "leaf": {
+                              "key": "0x00199374",
+                              "ty": 0
+                            }
+                          },
+                          "name": "id"
+                        },
+                        {
+                          "layout": {
+                            "leaf": {
+                              "key": "0x00199374",
+                              "ty": 0
+                            }
+                          },
+                          "name": "event_id"
+                        },
+                        {
+                          "layout": {
+                            "leaf": {
+                              "key": "0x00199374",
+                              "ty": 2
+                            }
+                          },
+                          "name": "owner"
+                        },
+                        {
+                          "layout": {
+                            "leaf": {
+                              "key": "0x00199374",
+                              "ty": 0
+                            }
+                          },
+                          "name": "purchase_time"
+                        },
+                        {
+                          "layout": {
+                            "leaf": {
+                              "key": "0x00199374",
+                              "ty": 7
+                            }
+                          },
+                          "name": "is_used"
+                        },
+                        {
+                          "layout": {
+                            "leaf": {
+                              "key": "0x00199374",
+                              "ty": 7
+                            }
+                          },
+                          "name": "is_refunded"
+                        }
+                      ],
+                      "name": "Ticket"
+                    }
+                  },
+                  "root_key": "0x00199374",
+                  "ty": 14
+                }
+              },
+              "name": "tickets"
+            },
+            {
+              "layout": {
+                "root": {
+                  "layout": {
+                    "leaf": {
+                      "key": "0xef6492b5",
+                      "ty": 18
+                    }
+                  },
+                  "root_key": "0xef6492b5",
+                  "ty": 20
+                }
+              },
+              "name": "owner_tickets"
+            },
+            {
+              "layout": {
+                "leaf": {
+                  "key": "0x00000000",
+                  "ty": 2
+                }
+              },
+              "name": "admin"
+            }
+          ],
+          "name": "TicketDot"
+        }
+      },
+      "root_key": "0x00000000",
+      "ty": 23
+    }
+  },
+  "types": [
+    {
+      "id": 0,
+      "type": {
+        "def": {
+          "primitive": "u64"
+        }
+      }
+    },
+    {
+      "id": 1,
+      "type": {
+        "def": {
+          "primitive": "str"
+        }
+      }
+    },
+    {
+      "id": 2,
+      "type": {
+        "def": {
+          "composite": {
+            "fields": [
+              {
+                "type": 3,
+                "typeName": "[u8; 32]"
+              }
+            ]
+          }
+        },
+        "path": [
+          "ink_primitives",
+          "types",
+          "AccountId"
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "type": {
+        "def": {
+          "array": {
+            "len": 32,
+            "type": 4
+          }
+        }
+      }
+    },
+    {
+      "id": 4,
+      "type": {
+        "def": {
+          "primitive": "u8"
+        }
+      }
+    },
+    {
+      "id": 5,
+      "type": {
+        "def": {
+          "primitive": "u128"
+        }
+      }
+    },
+    {
+      "id": 6,
+      "type": {
+        "def": {
+          "primitive": "u32"
+        }
+      }
+    },
+    {
+      "id": 7,
+      "type": {
+        "def": {
+          "primitive": "bool"
+        }
+      }
+    },
+    {
+      "id": 8,
+      "type": {
+        "def": {
+          "composite": {}
+        },
+        "params": [
+          {
+            "name": "K",
+            "type": 0
+          },
+          {
+            "name": "V",
+            "type": 9
+          },
+          {
+            "name": "KeyType",
+            "type": 10
+          }
+        ],
+        "path": [
+          "ink_storage",
+          "lazy",
+          "mapping",
+          "Mapping"
+        ]
+      }
+    },
+    {
+      "id": 9,
+      "type": {
+        "def": {
+          "composite": {
+            "fields": [
+              {
+                "name": "id",
+                "type": 0,
+                "typeName": "u64"
+              },
+              {
+                "name": "name",
+                "type": 1,
+                "typeName": "String"
+              },
+              {
+                "name": "organizer",
+                "type": 2,
+                "typeName": "AccountId"
+              },
+              {
+                "name": "price",
+                "type": 5,
+                "typeName": "Balance"
+              },
+              {
+                "name": "total_tickets",
+                "type": 6,
+                "typeName": "u32"
+              },
+              {
+                "name": "available_tickets",
+                "type": 6,
+                "typeName": "u32"
+              },
+              {
+                "name": "timestamp",
+                "type": 0,
+                "typeName": "u64"
+              },
+              {
+                "name": "metadata_cid",
+                "type": 1,
+                "typeName": "String"
+              },
+              {
+                "name": "active",
+                "type": 7,
+                "typeName": "bool"
+              },
+              {
+                "name": "cancelled",
+                "type": 7,
+                "typeName": "bool"
+              },
+              {
+                "name": "completed",
+                "type": 7,
+                "typeName": "bool"
+              }
+            ]
+          }
+        },
+        "path": [
+          "ticketdot",
+          "ticketdot",
+          "Event"
+        ]
+      }
+    },
+    {
+      "id": 10,
+      "type": {
+        "def": {
+          "composite": {}
+        },
+        "params": [
+          {
+            "name": "L",
+            "type": 11
+          },
+          {
+            "name": "R",
+            "type": 12
+          }
+        ],
+        "path": [
+          "ink_storage_traits",
+          "impls",
+          "ResolverKey"
+        ]
+      }
+    },
+    {
+      "id": 11,
+      "type": {
+        "def": {
+          "composite": {}
+        },
+        "path": [
+          "ink_storage_traits",
+          "impls",
+          "AutoKey"
+        ]
+      }
+    },
+    {
+      "id": 12,
+      "type": {
+        "def": {
+          "composite": {}
+        },
+        "params": [
+          {
+            "name": "ParentKey",
+            "type": 13
+          }
+        ],
+        "path": [
+          "ink_storage_traits",
+          "impls",
+          "ManualKey"
+        ]
+      }
+    },
+    {
+      "id": 13,
+      "type": {
+        "def": {
+          "tuple": []
+        }
+      }
+    },
+    {
+      "id": 14,
+      "type": {
+        "def": {
+          "composite": {}
+        },
+        "params": [
+          {
+            "name": "K",
+            "type": 0
+          },
+          {
+            "name": "V",
+            "type": 15
+          },
+          {
+            "name": "KeyType",
+            "type": 16
+          }
+        ],
+        "path": [
+          "ink_storage",
+          "lazy",
+          "mapping",
+          "Mapping"
+        ]
+      }
+    },
+    {
+      "id": 15,
+      "type": {
+        "def": {
+          "composite": {
+            "fields": [
+              {
+                "name": "id",
+                "type": 0,
+                "typeName": "u64"
+              },
+              {
+                "name": "event_id",
+                "type": 0,
+                "typeName": "u64"
+              },
+              {
+                "name": "owner",
+                "type": 2,
+                "typeName": "AccountId"
+              },
+              {
+                "name": "purchase_time",
+                "type": 0,
+                "typeName": "u64"
+              },
+              {
+                "name": "is_used",
+                "type": 7,
+                "typeName": "bool"
+              },
+              {
+                "name": "is_refunded",
+                "type": 7,
+                "typeName": "bool"
+              }
+            ]
+          }
+        },
+        "path": [
+          "ticketdot",
+          "ticketdot",
+          "Ticket"
+        ]
+      }
+    },
+    {
+      "id": 16,
+      "type": {
+        "def": {
+          "composite": {}
+        },
+        "params": [
+          {
+            "name": "L",
+            "type": 11
+          },
+          {
+            "name": "R",
+            "type": 17
+          }
+        ],
+        "path": [
+          "ink_storage_traits",
+          "impls",
+          "ResolverKey"
+        ]
+      }
+    },
+    {
+      "id": 17,
+      "type": {
+        "def": {
+          "composite": {}
+        },
+        "params": [
+          {
+            "name": "ParentKey",
+            "type": 13
+          }
+        ],
+        "path": [
+          "ink_storage_traits",
+          "impls",
+          "ManualKey"
+        ]
+      }
+    },
+    {
+      "id": 18,
+      "type": {
+        "def": {
+          "composite": {
+            "fields": [
+              {
+                "type": 19
+              }
+            ]
+          }
+        },
+        "params": [
+          {
+            "name": "T",
+            "type": 0
+          }
+        ],
+        "path": [
+          "BTreeSet"
+        ]
+      }
+    },
+    {
+      "id": 19,
+      "type": {
+        "def": {
+          "sequence": {
+            "type": 0
+          }
+        }
+      }
+    },
+    {
+      "id": 20,
+      "type": {
+        "def": {
+          "composite": {}
+        },
+        "params": [
+          {
+            "name": "K",
+            "type": 2
+          },
+          {
+            "name": "V",
+            "type": 18
+          },
+          {
+            "name": "KeyType",
+            "type": 21
+          }
+        ],
+        "path": [
+          "ink_storage",
+          "lazy",
+          "mapping",
+          "Mapping"
+        ]
+      }
+    },
+    {
+      "id": 21,
+      "type": {
+        "def": {
+          "composite": {}
+        },
+        "params": [
+          {
+            "name": "L",
+            "type": 11
+          },
+          {
+            "name": "R",
+            "type": 22
+          }
+        ],
+        "path": [
+          "ink_storage_traits",
+          "impls",
+          "ResolverKey"
+        ]
+      }
+    },
+    {
+      "id": 22,
+      "type": {
+        "def": {
+          "composite": {}
+        },
+        "params": [
+          {
+            "name": "ParentKey",
+            "type": 13
+          }
+        ],
+        "path": [
+          "ink_storage_traits",
+          "impls",
+          "ManualKey"
+        ]
+      }
+    },
+    {
+      "id": 23,
+      "type": {
+        "def": {
+          "composite": {
+            "fields": [
+              {
+                "name": "event_counter",
+                "type": 0,
+                "typeName": "<u64 as::ink::storage::traits::AutoStorableHint<::ink::storage\n::traits::ManualKey<4260506649u32, ()>,>>::Type"
+              },
+              {
+                "name": "ticket_counter",
+                "type": 0,
+                "typeName": "<u64 as::ink::storage::traits::AutoStorableHint<::ink::storage\n::traits::ManualKey<1362056710u32, ()>,>>::Type"
+              },
+              {
+                "name": "events",
+                "type": 8,
+                "typeName": "<Mapping<u64, Event> as::ink::storage::traits::AutoStorableHint<\n::ink::storage::traits::ManualKey<1052582069u32, ()>,>>::Type"
+              },
+              {
+                "name": "tickets",
+                "type": 14,
+                "typeName": "<Mapping<u64, Ticket> as::ink::storage::traits::AutoStorableHint<\n::ink::storage::traits::ManualKey<1955797248u32, ()>,>>::Type"
+              },
+              {
+                "name": "owner_tickets",
+                "type": 20,
+                "typeName": "<Mapping<AccountId, BTreeSet<u64>> as::ink::storage::traits::\nAutoStorableHint<::ink::storage::traits::ManualKey<3046270191u32,\n()>,>>::Type"
+              },
+              {
+                "name": "admin",
+                "type": 2,
+                "typeName": "<AccountId as::ink::storage::traits::AutoStorableHint<::ink::\nstorage::traits::ManualKey<1223414914u32, ()>,>>::Type"
+              }
+            ]
+          }
+        },
+        "path": [
+          "ticketdot",
+          "ticketdot",
+          "TicketDot"
+        ]
+      }
+    },
+    {
+      "id": 24,
+      "type": {
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "fields": [
+                  {
+                    "type": 13
+                  }
+                ],
+                "index": 0,
+                "name": "Ok"
+              },
+              {
+                "fields": [
+                  {
+                    "type": 25
+                  }
+                ],
+                "index": 1,
+                "name": "Err"
+              }
+            ]
+          }
+        },
+        "params": [
+          {
+            "name": "T",
+            "type": 13
+          },
+          {
+            "name": "E",
+            "type": 25
+          }
+        ],
+        "path": [
+          "Result"
+        ]
+      }
+    },
+    {
+      "id": 25,
+      "type": {
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "index": 1,
+                "name": "CouldNotReadInput"
+              }
+            ]
+          }
+        },
+        "path": [
+          "ink_primitives",
+          "LangError"
+        ]
+      }
+    },
+    {
+      "id": 26,
+      "type": {
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "fields": [
+                  {
+                    "type": 27
+                  }
+                ],
+                "index": 0,
+                "name": "Ok"
+              },
+              {
+                "fields": [
+                  {
+                    "type": 25
+                  }
+                ],
+                "index": 1,
+                "name": "Err"
+              }
+            ]
+          }
+        },
+        "params": [
+          {
+            "name": "T",
+            "type": 27
+          },
+          {
+            "name": "E",
+            "type": 25
+          }
+        ],
+        "path": [
+          "Result"
+        ]
+      }
+    },
+    {
+      "id": 27,
+      "type": {
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "fields": [
+                  {
+                    "type": 0
+                  }
+                ],
+                "index": 0,
+                "name": "Ok"
+              },
+              {
+                "fields": [
+                  {
+                    "type": 28
+                  }
+                ],
+                "index": 1,
+                "name": "Err"
+              }
+            ]
+          }
+        },
+        "params": [
+          {
+            "name": "T",
+            "type": 0
+          },
+          {
+            "name": "E",
+            "type": 28
+          }
+        ],
+        "path": [
+          "Result"
+        ]
+      }
+    },
+    {
+      "id": 28,
+      "type": {
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "index": 0,
+                "name": "EventNotFound"
+              },
+              {
+                "index": 1,
+                "name": "SoldOut"
+              },
+              {
+                "index": 2,
+                "name": "InsufficientPayment"
+              },
+              {
+                "index": 3,
+                "name": "TicketNotFound"
+              },
+              {
+                "index": 4,
+                "name": "NotTicketOwner"
+              },
+              {
+                "index": 5,
+                "name": "EventNotActive"
+              },
+              {
+                "index": 6,
+                "name": "TicketAlreadyUsed"
+              },
+              {
+                "index": 7,
+                "name": "TransferFailed"
+              },
+              {
+                "index": 8,
+                "name": "NotOrganizer"
+              },
+              {
+                "index": 9,
+                "name": "EventCancelled"
+              },
+              {
+                "index": 10,
+                "name": "EventCompleted"
+              },
+              {
+                "index": 11,
+                "name": "TicketAlreadyRefunded"
+              },
+              {
+                "index": 12,
+                "name": "InvalidInput"
+              },
+              {
+                "index": 13,
+                "name": "TooManyTickets"
+              },
+              {
+                "index": 14,
+                "name": "InsufficientBalance"
+              },
+              {
+                "index": 15,
+                "name": "EventNotCompleted"
+              }
+            ]
+          }
+        },
+        "path": [
+          "ticketdot",
+          "ticketdot",
+          "Error"
+        ]
+      }
+    },
+    {
+      "id": 29,
+      "type": {
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "fields": [
+                  {
+                    "type": 30
+                  }
+                ],
+                "index": 0,
+                "name": "Ok"
+              },
+              {
+                "fields": [
+                  {
+                    "type": 25
+                  }
+                ],
+                "index": 1,
+                "name": "Err"
+              }
+            ]
+          }
+        },
+        "params": [
+          {
+            "name": "T",
+            "type": 30
+          },
+          {
+            "name": "E",
+            "type": 25
+          }
+        ],
+        "path": [
+          "Result"
+        ]
+      }
+    },
+    {
+      "id": 30,
+      "type": {
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "fields": [
+                  {
+                    "type": 13
+                  }
+                ],
+                "index": 0,
+                "name": "Ok"
+              },
+              {
+                "fields": [
+                  {
+                    "type": 28
+                  }
+                ],
+                "index": 1,
+                "name": "Err"
+              }
+            ]
+          }
+        },
+        "params": [
+          {
+            "name": "T",
+            "type": 13
+          },
+          {
+            "name": "E",
+            "type": 28
+          }
+        ],
+        "path": [
+          "Result"
+        ]
+      }
+    },
+    {
+      "id": 31,
+      "type": {
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "fields": [
+                  {
+                    "type": 32
+                  }
+                ],
+                "index": 0,
+                "name": "Ok"
+              },
+              {
+                "fields": [
+                  {
+                    "type": 25
+                  }
+                ],
+                "index": 1,
+                "name": "Err"
+              }
+            ]
+          }
+        },
+        "params": [
+          {
+            "name": "T",
+            "type": 32
+          },
+          {
+            "name": "E",
+            "type": 25
+          }
+        ],
+        "path": [
+          "Result"
+        ]
+      }
+    },
+    {
+      "id": 32,
+      "type": {
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "index": 0,
+                "name": "None"
+              },
+              {
+                "fields": [
+                  {
+                    "type": 9
+                  }
+                ],
+                "index": 1,
+                "name": "Some"
+              }
+            ]
+          }
+        },
+        "params": [
+          {
+            "name": "T",
+            "type": 9
+          }
+        ],
+        "path": [
+          "Option"
+        ]
+      }
+    },
+    {
+      "id": 33,
+      "type": {
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "fields": [
+                  {
+                    "type": 34
+                  }
+                ],
+                "index": 0,
+                "name": "Ok"
+              },
+              {
+                "fields": [
+                  {
+                    "type": 25
+                  }
+                ],
+                "index": 1,
+                "name": "Err"
+              }
+            ]
+          }
+        },
+        "params": [
+          {
+            "name": "T",
+            "type": 34
+          },
+          {
+            "name": "E",
+            "type": 25
+          }
+        ],
+        "path": [
+          "Result"
+        ]
+      }
+    },
+    {
+      "id": 34,
+      "type": {
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "index": 0,
+                "name": "None"
+              },
+              {
+                "fields": [
+                  {
+                    "type": 15
+                  }
+                ],
+                "index": 1,
+                "name": "Some"
+              }
+            ]
+          }
+        },
+        "params": [
+          {
+            "name": "T",
+            "type": 15
+          }
+        ],
+        "path": [
+          "Option"
+        ]
+      }
+    },
+    {
+      "id": 35,
+      "type": {
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "fields": [
+                  {
+                    "type": 19
+                  }
+                ],
+                "index": 0,
+                "name": "Ok"
+              },
+              {
+                "fields": [
+                  {
+                    "type": 25
+                  }
+                ],
+                "index": 1,
+                "name": "Err"
+              }
+            ]
+          }
+        },
+        "params": [
+          {
+            "name": "T",
+            "type": 19
+          },
+          {
+            "name": "E",
+            "type": 25
+          }
+        ],
+        "path": [
+          "Result"
+        ]
+      }
+    },
+    {
+      "id": 36,
+      "type": {
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "fields": [
+                  {
+                    "type": 0
+                  }
+                ],
+                "index": 0,
+                "name": "Ok"
+              },
+              {
+                "fields": [
+                  {
+                    "type": 25
+                  }
+                ],
+                "index": 1,
+                "name": "Err"
+              }
+            ]
+          }
+        },
+        "params": [
+          {
+            "name": "T",
+            "type": 0
+          },
+          {
+            "name": "E",
+            "type": 25
+          }
+        ],
+        "path": [
+          "Result"
+        ]
+      }
+    },
+    {
+      "id": 37,
+      "type": {
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "fields": [
+                  {
+                    "type": 2
+                  }
+                ],
+                "index": 0,
+                "name": "Ok"
+              },
+              {
+                "fields": [
+                  {
+                    "type": 25
+                  }
+                ],
+                "index": 1,
+                "name": "Err"
+              }
+            ]
+          }
+        },
+        "params": [
+          {
+            "name": "T",
+            "type": 2
+          },
+          {
+            "name": "E",
+            "type": 25
+          }
+        ],
+        "path": [
+          "Result"
+        ]
+      }
+    },
+    {
+      "id": 38,
+      "type": {
+        "def": {
+          "composite": {
+            "fields": [
+              {
+                "type": 3,
+                "typeName": "[u8; 32]"
+              }
+            ]
+          }
+        },
+        "path": [
+          "ink_primitives",
+          "types",
+          "Hash"
+        ]
+      }
+    },
+    {
+      "id": 39,
+      "type": {
+        "def": {
+          "variant": {}
+        },
+        "path": [
+          "ink_env",
+          "types",
+          "NoChainExtension"
+        ]
+      }
+    }
+  ],
+  "version": 5
+}
