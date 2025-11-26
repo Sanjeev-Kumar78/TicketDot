@@ -2,6 +2,14 @@
 
 > A blockchain-verified ticket booking platform built on Astar Network that eliminates fraud by representing each ticket as an NFT.
 
+> [!NOTE]
+> **Enjoyed the project? Vote for us on DevPost!**
+>
+> <a href="https://devpost.com/software/ticketdot?_gl=1*fy4e12*_gcl_au*MTM2NDIxMjQzNS4xNzYxNDA1NjE4*_ga*NzA3OTE3ODE5LjE3NjE0MDU2MTg.*_ga_0YHJK3Y10M*czE3NjQxOTc0NzgkbzgkZzEkdDE3NjQxOTc1NzgkajI5JGwwJGgw" target="_blank">
+>   <img src="https://img.shields.io/badge/►%20VOTE%20ON%20DEVPOST-1DA1F2?style=for-the-badge&logo=devpost&logoColor=white&labelColor=0A0A23" height="60">
+> </a>
+
+
 ## 🌟 Overview
 
 TicketDot is a decentralized application (DApp) that revolutionizes event ticketing by:
